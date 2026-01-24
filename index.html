@@ -6,18 +6,17 @@
     <title>zastation Sweet Treats | Premium Candy Shop</title>
     <style>
         body, html { margin: 0; padding: 0; font-family: -apple-system, sans-serif; background: #fff5f8; }
-
-        /* --- 白页 (Safe Page) --- */
+        /* --- 白页样式 --- */
         #safe-page { display: block; text-align: center; padding-bottom: 50px; }
         .candy-header { background: #ff8fb1; padding: 40px 20px; color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
         .candy-logo { font-size: 24px; font-weight: bold; letter-spacing: 1px; }
         .candy-hero { padding: 40px 20px; }
         .candy-card-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; padding: 10px; max-width: 1000px; margin: 0 auto; }
         .candy-card { background: white; border-radius: 12px; width: calc(50% - 20px); max-width: 160px; padding: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .candy-img { width: 100%; height: 120px; border-radius: 8px; margin-bottom: 8px; object-fit: cover; background: #f0f0f0; }
+        .candy-img { width: 100%; height: 120px; border-radius: 8px; margin-bottom: 8px; object-fit: cover; background: #f0f0f0; display: block; }
         .candy-name { font-size: 13px; font-weight: 600; color: #444; line-height: 1.4; height: 36px; overflow: hidden; }
 
-        /* --- 钱页 (Money Page) --- */
+        /* --- 钱页样式 --- */
         #money-page { 
             display: none; background: #000; color: #fff; position: fixed; 
             top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; 
@@ -31,43 +30,41 @@
             max-width: 320px; border-radius: 4px; font-size: 16px; letter-spacing: 2px;
             text-transform: uppercase; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); 
         }
-        .m-footer { position: absolute; bottom: 40px; font-size: 10px; color: #444; letter-spacing: 3px; }
     </style>
 </head>
 <body>
 
     <div id="safe-page">
         <div class="candy-header"><div class="candy-logo">zastation Sweet Treats</div></div>
-        <div class="candy-hero"><h2 style="color: #ff8fb1;">Premium Collection</h2><p style="color: #999;">Handcrafted sweets for Every Occasion.</p></div>
+        <div class="candy-hero"><h2 style="color: #ff8fb1;">Premium Collection</h2><p style="color: #999;">Explore our handcrafted selection.</p></div>
         
         <div class="candy-card-container">
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1581798459219-318e76aecc7b?w=300" class="candy-img"><div class="candy-name">Fruit Gummy Mix</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1534073828943-f801091bb18c?w=300" class="candy-img"><div class="candy-name">Sparkling Rock Sugar</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1499195333224-3ce974eecfb4?w=300" class="candy-img"><div class="candy-name">Rainbow Swirl Pop</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1575224300306-1b8da36134ec?w=300" class="candy-img"><div class="candy-name">Artisan Macarons</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1525059696034-4967a8e1dca2?w=300" class="candy-img"><div class="candy-name">Gourmet Jelly Beans</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1532117892888-38c217a6d44a?w=300" class="candy-img"><div class="candy-name">Creamy Marshmallows</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1621939514649-280e2eeec7f4?w=300" class="candy-img"><div class="candy-name">Classic Hard Candy</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1544473244-f6895a69ad41?w=300" class="candy-img"><div class="candy-name">Pastel Pastel Mints</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1600359756098-8bc52195bbf4?w=300" class="candy-img"><div class="candy-name">Milk Chocolate Balls</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=300" class="candy-img"><div class="candy-name">Luxury Cocoa Bites</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1504113888839-1c8ec03fce78?w=300" class="candy-img"><div class="candy-name">Striped Peppermints</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1471943311424-646960669fba?w=300" class="candy-img"><div class="candy-name">Candied Fruit Slices</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1511381939415-e44015466834?w=300" class="candy-img"><div class="candy-name">Soft Toffee Cube</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1559181567-c3190cb9959b?w=300" class="candy-img"><div class="candy-name">Wild Berry Chews</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1627916607164-7b20241db935?w=300" class="candy-img"><div class="candy-name">Sour Gummy Strings</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1536681731411-36cd5489b018?w=300" class="candy-img"><div class="candy-name">Sweet Cotton Fluff</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1614083576545-82e1fc0441d8?w=300" class="candy-img"><div class="candy-name">Golden Honey Drops</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?w=300" class="candy-img"><div class="candy-name">Glazed Nut Toffee</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1528975604071-b4dc52a2d18c?w=300" class="candy-img"><div class="candy-name">Dark Chocolate Tile</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1517094857443-807765ec15e8?w=300" class="candy-img"><div class="candy-name">Crystal Sugar Bites</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1581798459219-318e76aecc7b?w=400" class="candy-img"><div class="candy-name">Fruit Gummy Bears</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1534073828943-f801091bb18c?w=400" class="candy-img"><div class="candy-name">Sparkling Rock Candy</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1499195333224-3ce974eecfb4?w=400" class="candy-img"><div class="candy-name">Rainbow Swirl Pop</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1575224300306-1b8da36134ec?w=400" class="candy-img"><div class="candy-name">Artisan Macarons</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1525059696034-4967a8e1dca2?w=400" class="candy-img"><div class="candy-name">Assorted Jelly Beans</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1532117892888-38c217a6d44a?w=400" class="candy-img"><div class="candy-name">Cloud Marshmallows</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1621939514649-280e2eeec7f4?w=400" class="candy-img"><div class="candy-name">Vintage Hard Sweets</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1544473244-f6895a69ad41?w=400" class="candy-img"><div class="candy-name">Pastel Mints</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1600359756098-8bc52195bbf4?w=400" class="candy-img"><div class="candy-name">Milk Chocolate Gems</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=400" class="candy-img"><div class="candy-name">Dark Cocoa Truffles</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1504113888839-1c8ec03fce78?w=400" class="candy-img"><div class="candy-name">Peppermint Drops</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1471943311424-646960669fba?w=400" class="candy-img"><div class="candy-name">Candied Fruit Bites</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1511381939415-e44015466834?w=400" class="candy-img"><div class="candy-name">Honey Caramel Cubes</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1559181567-c3190cb9959b?w=400" class="candy-img"><div class="candy-name">Forest Berry Chews</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1627916607164-7b20241db935?w=400" class="candy-img"><div class="candy-name">Neon Sour Worms</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1536681731411-36cd5489b018?w=400" class="candy-img"><div class="candy-name">Strawberry Fluff</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1614083576545-82e1fc0441d8?w=400" class="candy-img"><div class="candy-name">Honeycomb Toffee</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?w=400" class="candy-img"><div class="candy-name">Sweet Glazed Treats</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1528975604071-b4dc52a2d18c?w=400" class="candy-img"><div class="candy-name">Pure Cocoa Tiles</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1517094857443-807765ec15e8?w=400" class="candy-img"><div class="candy-name">Crystal Sugar Rocks</div></div>
         </div>
-        
         <p style="font-size: 11px; color: #ccc; margin-top: 50px;">© 2026 zastation Confectionery. All rights reserved.</p>
     </div>
 
     <div id="money-page">
-        <img src="logo.png" alt="zastation" class="m-logo" onerror="this.src='https://via.placeholder.com/150/000000/FFFFFF?text=Logo+Missing'">
+        <img src="https://zastation.github.io/ZASTATION/logo.png" alt="zastation" class="m-logo" onerror="this.src='https://via.placeholder.com/150/000000/FFFFFF?text=ZA+Logo'">
         <div class="m-h1">To order, please join our Telegram Channel.</div>
         <a href="https://t.me/+M8BUaAlXvp4yZTkx" class="btn">JOIN CHANNEL</a>
         <div class="m-footer">SECURE ACCESS BY zastation</div>
@@ -77,9 +74,8 @@
         (function() {
             var ua = navigator.userAgent;
             var ref = document.referrer;
-            // 判断来源是否为 Instagram
+            // 严谨的分流逻辑
             var isInsta = (ref.indexOf('instagram.com') !== -1 || ua.indexOf('Instagram') !== -1);
-            // 屏蔽常见审查爬虫
             var bots = ['Facebot', 'facebookexternalhit', 'Googlebot', 'Twitterbot', 'AdsBot', 'Lighthouse'];
             var isBot = bots.some(function(bot) { return ua.indexOf(bot) !== -1; });
 
