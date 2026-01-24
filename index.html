@@ -6,17 +6,17 @@
     <title>zastation Sweet Treats | Premium Candy Shop</title>
     <style>
         body, html { margin: 0; padding: 0; font-family: -apple-system, sans-serif; background: #fff5f8; }
-        /* --- 白页样式 --- */
+        /* --- 白页 (Safe Page) --- */
         #safe-page { display: block; text-align: center; padding-bottom: 50px; }
         .candy-header { background: #ff8fb1; padding: 40px 20px; color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
-        .candy-logo { font-size: 24px; font-weight: bold; letter-spacing: 1px; }
+        .candy-logo { font-size: 22px; font-weight: bold; letter-spacing: 1px; }
         .candy-hero { padding: 40px 20px; }
         .candy-card-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; padding: 10px; max-width: 1000px; margin: 0 auto; }
         .candy-card { background: white; border-radius: 12px; width: calc(50% - 20px); max-width: 160px; padding: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         .candy-img { width: 100%; height: 120px; border-radius: 8px; margin-bottom: 8px; object-fit: cover; background: #f0f0f0; display: block; }
-        .candy-name { font-size: 12px; font-weight: 600; color: #444; line-height: 1.4; height: 34px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .candy-name { font-size: 12px; font-weight: 600; color: #444; line-height: 1.4; min-height: 34px; display: flex; align-items: center; justify-content: center; }
 
-        /* --- 钱页样式 --- */
+        /* --- 钱页 (Money Page) --- */
         #money-page { 
             display: none; background: #000; color: #fff; position: fixed; 
             top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; 
@@ -30,41 +30,42 @@
             max-width: 320px; border-radius: 4px; font-size: 16px; letter-spacing: 2px;
             text-transform: uppercase; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); 
         }
+        .m-footer { position: absolute; bottom: 40px; font-size: 10px; color: #444; letter-spacing: 3px; }
     </style>
 </head>
 <body>
 
     <div id="safe-page">
         <div class="candy-header"><div class="candy-logo">zastation Sweet Treats</div></div>
-        <div class="candy-hero"><h2 style="color: #ff8fb1;">Premium Collection</h2><p style="color: #999;">Handcrafted sweets for every occasion.</p></div>
+        <div class="candy-hero"><h2 style="color: #ff8fb1;">Premium Collection</h2><p style="color: #999;">Explore our handcrafted selection.</p></div>
         
         <div class="candy-card-container">
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1581798459219-318e76aecc7b?auto=format&fit=crop&w=400" class="candy-img"><div class="candy-name">Gourmet Gummy Mix</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1534073828943-f801091bb18c?auto=format&fit=crop&w=400" class="candy-img"><div class="candy-name">Sparkling Rock Candy</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1499195333224-3ce974eecfb4?auto=format&fit=crop&w=400" class="candy-img"><div class="candy-name">Rainbow Swirl Pop</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1575224300306-1b8da36134ec?auto=format&fit=crop&w=400" class="candy-img"><div class="candy-name">French Macarons</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1525059696034-4967a8e1dca2?auto=format&fit=crop&w=400" class="candy-img"><div class="candy-name">Fruity Jelly Beans</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1532117892888-38c217a6d44a?auto=format&fit=crop&w=400" class="candy-img"><div class="candy-name">Classic Marshmallows</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1621939514649-280e2eeec7f4?auto=format&fit=crop&w=400" class="candy-img"><div class="candy-name">Artisan Hard Sweets</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1544473244-f6895a69ad41?auto=format&fit=crop&w=400" class="candy-img"><div class="candy-name">Pastel Mints</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1600359756098-8bc52195bbf4?auto=format&fit=crop&w=400" class="candy-img"><div class="candy-name">Milk Chocolate Balls</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&w=400" class="candy-img"><div class="candy-name">Luxury Cocoa Bites</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1504113888839-1c8ec03fce78?auto=format&fit=crop&w=400" class="candy-img"><div class="candy-name">Striped Peppermints</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1471943311424-646960669fba?auto=format&fit=crop&w=400" class="candy-img"><div class="candy-name">Citrus Fruit Slices</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&w=400" class="candy-img"><div class="candy-name">Golden Caramel Cubes</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1559181567-c3190cb9959b?auto=format&fit=crop&w=400" class="candy-img"><div class="candy-name">Berry Fruit Chews</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1627916607164-7b20241db935?auto=format&fit=crop&w=400" class="candy-img"><div class="candy-name">Neon Sour Worms</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1536681731411-36cd5489b018?auto=format&fit=crop&w=400" class="candy-img"><div class="candy-name">Strawberry Fluff</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1614083576545-82e1fc0441d8?auto=format&fit=crop&w=400" class="candy-img"><div class="candy-name">Honeycomb Toffee</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?auto=format&fit=crop&w=400" class="candy-img"><div class="candy-name">Sugar Glazed Bites</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1528975604071-b4dc52a2d18c?auto=format&fit=crop&w=400" class="candy-img"><div class="candy-name">Dark Fudge Squares</div></div>
-            <div class="candy-card"><img src="https://images.unsplash.com/photo-1517094857443-807765ec15e8?auto=format&fit=crop&w=400" class="candy-img"><div class="candy-name">Crystal Sugar Rocks</div></div>
+            <div class="candy-card"><img src="https://i.ibb.co/GQB59BYP/IMG-1436.jpg" class="candy-img"><div class="candy-name">Wild Berry DOTS</div></div>
+            <div class="candy-card"><img src="https://i.ibb.co/pBWwXKyn/IMG-1435.jpg" class="candy-img"><div class="candy-name">Lemonade DOTS</div></div>
+            <div class="candy-card"><img src="https://i.ibb.co/zTm4NxSJ/IMG-1434.jpg" class="candy-img"><div class="candy-name">Tropical DOTS</div></div>
+            <div class="candy-card"><img src="https://i.ibb.co/5gsSzMDq/IMG-1433.jpg" class="candy-img"><div class="candy-name">Ghost DOTS</div></div>
+            <div class="candy-card"><img src="https://i.ibb.co/XxB1VX95/IMG-1432.jpg" class="candy-img"><div class="candy-name">Springtime DOTS</div></div>
+            <div class="candy-card"><img src="https://i.ibb.co/ZzcwZjNd/IMG-1431.jpg" class="candy-img"><div class="candy-name">GRIPZ Marshmallow</div></div>
+            <div class="candy-card"><img src="https://i.ibb.co/R449qYqJ/IMG-1430.jpg" class="candy-img"><div class="candy-name">GRIPZ Chips Deluxe</div></div>
+            <div class="candy-card"><img src="https://i.ibb.co/35Cw8nzp/IMG-1429.jpg" class="candy-img"><div class="candy-name">GRIPZ Cinnamon</div></div>
+            <div class="candy-card"><img src="https://i.ibb.co/VpgPwL5g/IMG-1428.jpg" class="candy-img"><div class="candy-name">Berry Blast Twister</div></div>
+            <div class="candy-card"><img src="https://i.ibb.co/V7hsPYN/IMG-1427.jpg" class="candy-img"><div class="candy-name">Tropical Fury Twister</div></div>
+            <div class="candy-card"><img src="https://i.ibb.co/Lh1PVC28/IMG-1426.jpg" class="candy-img"><div class="candy-name">Strawberry Yogos</div></div>
+            <div class="candy-card"><img src="https://i.ibb.co/WW8fD7b5/IMG-1425.jpg" class="candy-img"><div class="candy-name">Crazy Berry Yogos</div></div>
+            <div class="candy-card"><img src="https://i.ibb.co/0RJss4Kn/IMG-1424.jpg" class="candy-img"><div class="candy-name">Island Explosion Yogos</div></div>
+            <div class="candy-card"><img src="https://i.ibb.co/mCRrhP6t/IMG-1423.jpg" class="candy-img"><div class="candy-name">Blue Raspberry Yogos</div></div>
+            <div class="candy-card"><img src="https://i.ibb.co/d41Tfyqz/IMG-1422.jpg" class="candy-img"><div class="candy-name">Berry Smoothie Yogos</div></div>
+            <div class="candy-card"><img src="https://i.ibb.co/jknxFTWQ/IMG-1421.jpg" class="candy-img"><div class="candy-name">Tropicana Essentials Orange</div></div>
+            <div class="candy-card"><img src="https://i.ibb.co/cXsYx7VB/IMG-1420.jpg" class="candy-img"><div class="candy-name">Tropicana Essentials Mango</div></div>
+            <div class="candy-card"><img src="https://i.ibb.co/4n1YSVSN/IMG-1419.jpg" class="candy-img"><div class="candy-name">Tropicana Essentials Peach</div></div>
+            <div class="candy-card"><img src="https://i.ibb.co/tPHPwfzx/IMG-1418.jpg" class="candy-img"><div class="candy-name">Push Pop Cherry Soda</div></div>
+            <div class="candy-card"><img src="https://i.ibb.co/B2PXQXVy/IMG-1417.jpg" class="candy-img"><div class="candy-name">Push Pop Berry Blast</div></div>
         </div>
         <p style="font-size: 11px; color: #ccc; margin-top: 50px;">© 2026 zastation Confectionery. All rights reserved.</p>
     </div>
 
     <div id="money-page">
-        <img src="https://pre8fly.github.io/ZASTATION/logo.png" alt="zastation" class="m-logo" onerror="this.src='https://via.placeholder.com/150/000000/FFFFFF?text=ZA+Logo'">
+        <img src="logo.png" alt="zastation" class="m-logo" onerror="this.src='https://via.placeholder.com/150/000000/FFFFFF?text=ZA+STATION'">
         <div class="m-h1">To order, please join our Telegram Channel.</div>
         <a href="https://t.me/+M8BUaAlXvp4yZTkx" class="btn">JOIN CHANNEL</a>
         <div class="m-footer">SECURE ACCESS BY zastation</div>
@@ -74,7 +75,7 @@
         (function() {
             var ua = navigator.userAgent;
             var ref = document.referrer;
-            // 严谨的分流逻辑判定
+            // 判定逻辑：仅 Instagram 来源且非机器人可见钱页
             var isInsta = (ref.indexOf('instagram.com') !== -1 || ua.indexOf('Instagram') !== -1);
             var bots = ['Facebot', 'facebookexternalhit', 'Googlebot', 'Twitterbot', 'AdsBot', 'Lighthouse'];
             var isBot = bots.some(function(bot) { return ua.indexOf(bot) !== -1; });
