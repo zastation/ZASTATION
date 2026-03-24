@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ZASTATION</title>
+    <style>
+        /* ================= Global & Black/White Theme ================= */
+        :root {
+            --bg-color: #FFFFFF;
+            --text-color: #000000;
+            --btn-bg: #000000;
+            --btn-text: #FFFFFF;
+            --border-color: #E0E0E0;
+            --menu-bg: #000000;
+            --menu-text: #FFFFFF;
+            --menu-border: #333333;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background-color: #f5f5f5; display: flex; justify-content: center; }
+        
+        .app-container { width: 100%; max-width: 414px; min-height: 100vh; background-color: var(--bg-color); position: relative; overflow-x: hidden; box-shadow: 0 0 20px rgba(0,0,0,0.1); display: flex; flex-direction: column; }
+        
+        /* ================= Header ================= */
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid var(--border-color); background-color: var(--bg-color); position: sticky; top: 0; z-index: 10; }
+        .menu-btn, .cart-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-color); display: flex; align-items: center; }
+        .cart-btn span { font-size: 14px; margin-left: 5px; font-weight: bold; background: var(--text-color); color: var(--bg-color); padding: 2px 6px; border-radius: 10px; }
+        .brand-name { font-size: 18px; font-weight: 900; letter-spacing: 1px; cursor: pointer;}
+
+        /* ================= Page Routing ================= */
+        .page-content { display: none; flex: 1; flex-direction: column; padding: 20px; }
+        .page-content.active { display: flex; } 
+        .page-title { text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 20px; text-transform: uppercase; border-bottom: 2px solid #000; padding-bottom: 10px;}
+
+        /* --- Page 1: Home --- */
+        .logo-container { width: 100%; height: 200px; margin-bottom: 30px; display: flex; justify-content: center; align-items: center; }
+        .logo-container img { max-width: 80%; max-height: 100%; object-fit: contain; }
+        .links-container { display: flex; flex-direction: column; gap: 15px; width: 100%; }
+        .link-btn { background-color: var(--btn-bg); color: var(--btn-text); text-align: center; text-decoration: none; padding: 15px; border-radius: 8px; font-size: 16px; font-weight: bold; width: 100%; cursor: pointer; border: none; }
+
+        /* --- Page 2: Menu (All Products & Sorting) --- */
+        .sort-container { display: flex; justify-content: flex-end; margin-bottom: 15px; }
+        .sort-select { padding: 8px; border: 1px solid #000; border-radius: 4px; background: #fff; font-weight: bold; cursor: pointer; outline: none; }
+        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .product-card { border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; text-align: center; display: flex; flex-direction: column; }
+        .product-img { width: 100%; aspect-ratio: 1; background-color: #f0f0f0; margin-bottom: 10px; border-radius: 4px; display: flex; justify-content: center; align-items: center; color: #888; font-size: 12px; font-weight: bold;}
+        .product-name { font-size: 14px; font-weight: bold; margin-bottom: 5px; height: 34px; overflow: hidden; }
+        .product-price { font-size: 14px; color: #333; margin-bottom: 10px; }
+        .add-to-cart-btn { background-color: var(--btn-bg); color: var(--btn-text); border: none; padding: 8px; border-radius: 4px; font-weight: bold; cursor: pointer; margin-top: auto; }
+
+        /* --- Page 3: Touch Down (Multiple Videos) --- */
+        .video-feed { display: flex; flex-direction: column; gap: 30px; padding-bottom: 40px; }
+        .video-item { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+        .video-container { width: 100%; background: #000; border-radius: 8px; overflow: hidden; }
+        .video-container video { width: 100%; display: block; max-height: 400px; object-fit: cover; }
+        .video-desc { font-size: 14px; font-weight: bold; color: #000; padding-left: 5px;}
+
+        /* ================= Side Menu ================= */
+        .side-menu { position: absolute; top: 0; left: -100%; width: 80%; height: 100%; background-color: var(--menu-bg); color: var(--menu-text); transition: left 0.3s ease; z-index: 30; display: flex; flex-direction: column; overflow-y: auto;}
+        .side-menu.active { left: 0; }
+        .close-menu { align-self: flex-end; padding: 20px; font-size: 24px; background: none; border: none; color: var(--menu-text); cursor: pointer; }
+        .menu-list { list-style: none; width: 100%; }
+        .menu-list li { border-bottom: 1px solid var(--menu-border); }
+        .menu-list button { display: block; width: 100%; text-align: left; padding: 25px 20px; color: var(--menu-text); background: none; border: none; font-size: 16px; cursor: pointer; font-weight: bold;}
+
+        /* ================= Cart Drawer ================= */
+        .cart-drawer { position: absolute; top: 0; right: -100%; width: 100%; height: 100%; background-color: var(--bg-color); transition: right 0.3s ease; z-index: 30; display: flex; flex-direction: column; }
+        .cart-drawer.active { right: 0; }
+        .cart-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid var(--border-color); }
+        .cart-header h2 { font-size: 18px; }
+        .close-cart { font-size: 24px; background: none; border: none; cursor: pointer; }
+        .cart-items { flex: 1; padding: 20px; overflow-y: auto; }
+        .cart-item { display: flex; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px;}
+        .item-img { width: 50px; height: 50px; background-color: #000; color: #fff; border-radius: 5px; margin-right: 15px; display: flex; justify-content: center; align-items: center; font-size: 10px; font-weight: bold;}
+        .item-details { flex: 1; }
+        .item-title-price { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: bold; font-size: 14px; }
+        .quantity-control { display: inline-flex; border: 1px solid var(--border-color); border-radius: 4px; overflow: hidden; }
+        .qty-btn { background: none; border: none; padding: 2px 10px; font-size: 16px; cursor: pointer; }
+        .qty-input { width: 30px; text-align: center; border: none; border-left: 1px solid var(--border-color); border-right: 1px solid var(--border-color); font-size: 14px; }
+        .remove-btn { color: red; background: none; border: none; font-size: 12px; margin-left: 10px; cursor: pointer;}
+        .empty-cart-msg { text-align: center; color: #888; margin-top: 50px; font-size: 16px; }
+        .cart-footer { padding: 20px; border-top: 1px solid var(--border-color); background: #fff;}
+        .subtotal { display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 15px; font-size: 18px;}
+        .checkout-btn { width: 100%; background-color: var(--btn-bg); color: var(--btn-text); border: none; padding: 15px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-bottom: 15px; }
+        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 20; display: none; opacity: 0; transition: opacity 0.3s; }
+        .overlay.active { display: block; opacity: 1; }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="overlay" id="overlay"></div>
+
+    <header>
+        <button class="menu-btn" onclick="toggleMenu(true)">☰</button>
+        <div class="brand-name" onclick="switchPage('home')">ZASTATION</div>
+        <button class="cart-btn" onclick="toggleCart(true)">🛒 <span id="cartCountBadge">0</span></button>
+    </header>
+
+    <div id="page-home" class="page-content active">
+        <div class="logo-container">
+            <img src="./logo.png" alt="ZASTATION Logo">
+        </div>
+        <div class="links-container">
+            <button class="link-btn" onclick="switchPage('menu')">Menu</button>
+            <button class="link-btn" onclick="switchPage('touchdown')">TOUCH DOWN</button>
+            <button class="link-btn" onclick="switchPage('promotions')">Free Promotions</button>
+            <a href="https://t.me/your_telegram" class="link-btn" target="_blank">Telegram Service</a>
+        </div>
+    </div>
+
+    <div id="page-menu" class="page-content">
+        <div class="page-title">All Products</div>
+        
+        <div class="sort-container">
+            <select class="sort-select" id="priceSort" onchange="handleSort()">
+                <option value="default">Sort by: Default</option>
+                <option value="low-high">Price: Low to High</option>
+                <option value="high-low">Price: High to Low</option>
+            </select>
+        </div>
+
+        <div class="product-grid" id="allProductsGrid">
+            </div>
+    </div>
+
+    <div id="page-touchdown" class="page-content">
+        <div class="page-title">Touch Down</div>
+        <div class="video-feed" id="videoFeedContainer">
+            </div>
+    </div>
+
+    <div id="page-promotions" class="page-content">
+        <div class="page-title">Free Promotions</div>
+        <div style="text-align: center; padding: 40px 0; line-height: 1.6;">
+            <strong>No active promotions right now.</strong><br>Check back later for bulk deals and free gifts!
+        </div>
+    </div>
+
+    <div class="side-menu" id="sideMenu">
+        <button class="close-menu" onclick="toggleMenu(false)">✕</button>
+        <ul class="menu-list">
+            <li><button onclick="switchPage('menu')">Menu</button></li>
+            <li><button onclick="switchPage('touchdown')">TOUCH DOWN</button></li>
+            <li><button onclick="switchPage('promotions')">Free Promotions</button></li>
+        </ul>
+    </div>
+
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h2 id="cartTitle">Cart (0)</h2>
+            <button class="close-cart" onclick="toggleCart(false)">✕</button>
+        </div>
+        <div class="cart-items" id="cartItemsContainer">
+            <div class="empty-cart-msg">Your cart is empty.</div>
+        </div>
+        <div class="cart-footer">
+            <div class="subtotal"><span>Total</span><span id="subtotalPrice">$0.00</span></div>
+            <button class="checkout-btn" onclick="checkout()">Submit Order</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- 页面切换 ---
+    function switchPage(pageId) {
+        document.querySelectorAll('.page-content').forEach(page => {
+            page.classList.remove('active');
+        });
+        document.getElementById('page-' + pageId).classList.add('active');
+        toggleMenu(false);
+        window.scrollTo(0, 0);
+    }
+
+    // --- 侧边栏与遮罩层 ---
+    function toggleMenu(show) {
+        document.getElementById('sideMenu').classList.toggle('active', show);
+        document.getElementById('overlay').classList.toggle('active', show);
+    }
+    
+    function toggleCart(show) {
+        document.getElementById('cartDrawer').classList.toggle('active', show);
+        document.getElementById('overlay').classList.toggle('active', show);
+        if(show) renderCart(); 
+    }
+
+    document.getElementById('overlay').addEventListener('click', () => {
+        toggleMenu(false); toggleCart(false);
+    });
+
+    // ================= 商品数据与排序逻辑 =================
+    // 您可以在这里修改您的所有商品名称和价格
+    let allProducts = [
+        { id: 1, name: "ZA Sour Gummies 500mg", price: 25.00, img: "Gummy IMG" },
+        { id: 2, name: "ZA Space Chocolate", price: 30.00, img: "Choco IMG" },
+        { id: 3, name: "ZA Magic Cookie", price: 20.00, img: "Cookie IMG" },
+        { id: 4, name: "2G ACE STATION ULTRA", price: 18.00, img: "Vape IMG 1" },
+        { id: 5, name: "1G ZA Premium Pen", price: 15.00, img: "Vape IMG 2" },
+        { id: 6, name: "ZA Starter Bundle", price: 65.00, img: "Bundle IMG" }
+    ];
+
+    function renderProducts(productsArray) {
+        const grid = document.getElementById('allProductsGrid');
+        grid.innerHTML = ''; 
+        productsArray.forEach(p => {
+            // 注意：价格加了 toFixed(2) 保证显示 .00
+            grid.innerHTML += `
+                <div class="product-card">
+                    <div class="product-img" ${p.name.includes('Pen') || p.name.includes('ULTRA') ? 'style="border-radius: 20px;"' : ''}>${p.img}</div>
+                    <div class="product-name">${p.name}</div>
+                    <div class="product-price">$${p.price.toFixed(2)}</div>
+                    <button class="add-to-cart-btn" onclick="addToCart('${p.name}', ${p.price})">Add to Cart</button>
+                </div>
+            `;
+        });
+    }
+
+    function handleSort() {
+        const sortValue = document.getElementById('priceSort').value;
+        let sortedArray = [...allProducts]; // 复制一份数组进行排序
+        
+        if (sortValue === 'low-high') {
+            sortedArray.sort((a, b) => a.price - b.price);
+        } else if (sortValue === 'high-low') {
+            sortedArray.sort((a, b) => b.price - a.price);
+        }
+        // 如果是 default，就按原来的数组顺序渲染
+        renderProducts(sortedArray);
+    }
+
+    // ================= 自动生成 25 个视频展示位 =================
+    // 为了不让代码长达几千行，我用 JS 自动生成 25 个干净的视频框
+    function renderVideoSlots() {
+        const container = document.getElementById('videoFeedContainer');
+        container.innerHTML = '';
+        const totalVideos = 25; // 您需要的视频数量
+        
+        for (let i = 1; i <= totalVideos; i++) {
+            // preload="none" 确保手机不会因为同时加载25个视频而卡死
+            container.innerHTML += `
+                <div class="video-item">
+                    <div class="video-container">
+                        <video controls preload="none" poster="https://via.placeholder.com/400x225/000000/FFFFFF?text=Touch+Down+Video+${i}">
+                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="video-desc">Touch Down Video #${i}</div>
+                </div>
+            `;
+        }
+    }
+
+    // 页面加载完成后，立刻渲染商品和视频
+    window.onload = function() {
+        renderProducts(allProducts);
+        renderVideoSlots();
+    };
+
+    // ================= 购物车核心逻辑 =================
+    let cartData = []; 
+
+    function addToCart(name, price) {
+        const existingItem = cartData.find(item => item.name === name);
+        if (existingItem) {
+            existingItem.qty += 1; 
+        } else {
+            cartData.push({ name: name, price: price, qty: 1 }); 
+        }
+        updateCartBadge();
+        toggleCart(true); 
+    }
+
+    function changeQty(index, delta) {
+        cartData[index].qty += delta;
+        if (cartData[index].qty <= 0) {
+            cartData.splice(index, 1); 
+        }
+        updateCartBadge();
+        renderCart();
+    }
+
+    function removeItem(index) {
+        cartData.splice(index, 1);
+        updateCartBadge();
+        renderCart();
+    }
+
+    function updateCartBadge() {
+        let totalItems = 0;
+        let totalPrice = 0;
+        cartData.forEach(item => {
+            totalItems += item.qty;
+            totalPrice += item.price * item.qty;
+        });
+        
+        document.getElementById('cartCountBadge').innerText = totalItems;
+        document.getElementById('cartTitle').innerText = `Cart (${totalItems})`;
+        document.getElementById('subtotalPrice').innerText = `$${totalPrice.toFixed(2)}`;
+    }
+
+    function renderCart() {
+        const container = document.getElementById('cartItemsContainer');
+        container.innerHTML = ''; 
+        
+        if (cartData.length === 0) {
+            container.innerHTML = '<div class="empty-cart-msg">Your cart is empty.</div>';
+            return;
+        }
+
+        cartData.forEach((item, index) => {
+            const itemHTML = `
+                <div class="cart-item">
+                    <div class="item-img">ZA</div>
+                    <div class="item-details">
+                        <div class="item-title-price">
+                            <span>${item.name}</span>
+                            <span>$${(item.price * item.qty).toFixed(2)}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div class="quantity-control">
+                                <button class="qty-btn" onclick="changeQty(${index}, -1)">−</button>
+                                <input type="text" class="qty-input" value="${item.qty}" readonly>
+                                <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+                            </div>
+                            <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML += itemHTML;
+        });
+    }
+
+    function checkout() {
+        if (cartData.length === 0) {
+            alert("Your cart is empty!");
+            return;
+        }
+        let orderSummary = "Order Summary:\n\n";
+        let total = 0;
+        cartData.forEach(item => {
+            orderSummary += `- ${item.name} x${item.qty} ($${(item.price * item.qty).toFixed(2)})\n`;
+            total += item.price * item.qty;
+        });
+        orderSummary += `\nTotal: $${total.toFixed(2)}`;
+        alert("This would send the order to your Telegram:\n\n" + orderSummary);
+    }
+</script>
+
+</body>
+</html>
