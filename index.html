@@ -1,91 +1,350 @@
-<!DOCTYPE html>
+[2026/3/23 19:29] 超级鲨鱼辣椒: <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>zastation Sweet Treats | Premium Candy Shop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ZASTATION</title>
     <style>
-        body, html { margin: 0; padding: 0; font-family: -apple-system, sans-serif; background: #fff5f8; }
-        /* --- 白页 (Safe Page) --- */
-        #safe-page { display: block; text-align: center; padding-bottom: 50px; }
-        .candy-header { background: #ff8fb1; padding: 40px 20px; color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
-        .candy-logo { font-size: 22px; font-weight: bold; letter-spacing: 1px; }
-        .candy-hero { padding: 40px 20px; }
-        .candy-card-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; padding: 10px; max-width: 1000px; margin: 0 auto; }
-        .candy-card { background: white; border-radius: 12px; width: calc(50% - 20px); max-width: 160px; padding: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .candy-img { width: 100%; height: 120px; border-radius: 8px; margin-bottom: 8px; object-fit: cover; background: #f0f0f0; display: block; }
-        .candy-name { font-size: 12px; font-weight: 600; color: #444; line-height: 1.4; min-height: 34px; display: flex; align-items: center; justify-content: center; }
+        /* ================= Global & Black/White Theme ================= */
+        :root {
+            --bg-color: #FFFFFF;
+            --text-color: #000000;
+            --btn-bg: #000000;
+            --btn-text: #FFFFFF;
+            --border-color: #E0E0E0;
+            --menu-bg: #000000;
+            --menu-text: #FFFFFF;
+            --menu-border: #333333;
+        }
 
-        /* --- 钱页 (Money Page) --- */
-        #money-page { 
-            display: none; background: #000; color: #fff; position: fixed; 
-            top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; 
-            flex-direction: column; align-items: center; justify-content: center; text-align: center; 
-        }
-        .m-logo { width: 140px; height: auto; margin-bottom: 40px; }
-        .m-h1 { font-size: 18px; font-weight: 300; color: #e0e0e0; margin-bottom: 50px; letter-spacing: 1px; line-height: 1.6; padding: 0 40px; }
-        .btn { 
-            display: block; background: linear-gradient(135deg, #d4af37 0%, #f9e295 100%); 
-            color: #000; text-decoration: none; font-weight: 700; padding: 18px 0; width: 80%; 
-            max-width: 320px; border-radius: 4px; font-size: 16px; letter-spacing: 2px;
-            text-transform: uppercase; box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); 
-        }
-        .m-footer { position: absolute; bottom: 40px; font-size: 10px; color: #444; letter-spacing: 3px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background-color: #f5f5f5; display: flex; justify-content: center; }
+        
+        .app-container { width: 100%; max-width: 414px; min-height: 100vh; background-color: var(--bg-color); position: relative; overflow-x: hidden; box-shadow: 0 0 20px rgba(0,0,0,0.1); display: flex; flex-direction: column; }
+        
+        /* ================= Header ================= */
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid var(--border-color); background-color: var(--bg-color); position: sticky; top: 0; z-index: 10; }
+        .menu-btn, .cart-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-color); display: flex; align-items: center; }
+        .cart-btn span { font-size: 14px; margin-left: 5px; font-weight: bold; background: var(--text-color); color: var(--bg-color); padding: 2px 6px; border-radius: 10px; }
+        .brand-name { font-size: 18px; font-weight: 900; letter-spacing: 1px; cursor: pointer;}
+
+        /* ================= Page Routing ================= */
+        .page-content { display: none; flex: 1; flex-direction: column; padding: 20px; }
+        .page-content.active { display: flex; } 
+        .page-title { text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 20px; text-transform: uppercase; border-bottom: 2px solid #000; padding-bottom: 10px;}
+
+        /* --- Page 1: Home --- */
+        .logo-container { width: 100%; height: 200px; margin-bottom: 30px; display: flex; justify-content: center; align-items: center; }
+        .logo-container img { max-width: 80%; max-height: 100%; object-fit: contain; }
+        .links-container { display: flex; flex-direction: column; gap: 15px; width: 100%; }
+        .link-btn { background-color: var(--btn-bg); color: var(--btn-text); text-align: center; text-decoration: none; padding: 15px; border-radius: 8px; font-size: 16px; font-weight: bold; width: 100%; cursor: pointer; border: none; }
+
+        /* --- Page 2 & 3: Products (Edibles/Disposables) --- */
+        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .product-card { border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; text-align: center; display: flex; flex-direction: column; }
+        .product-img { width: 100%; aspect-ratio: 1; background-color: #f0f0f0; margin-bottom: 10px; border-radius: 4px; display: flex; justify-content: center; align-items: center; color: #888; font-size: 12px; font-weight: bold;}
+        .product-name { font-size: 14px; font-weight: bold; margin-bottom: 5px; height: 34px; overflow: hidden; }
+        .product-price { font-size: 14px; color: #333; margin-bottom: 10px; }
+        .add-to-cart-btn { background-color: var(--btn-bg); color: var(--btn-text); border: none; padding: 8px; border-radius: 4px; font-weight: bold; cursor: pointer; margin-top: auto; }
+
+        /* --- Page 4: Touch Down (Multiple Videos) --- */
+        .video-feed { display: flex; flex-direction: column; gap: 30px; padding-bottom: 40px; }
+        .video-item { width: 100%; display: flex; flex-direction: column; gap: 10px; }
+        .video-container { width: 100%; background: #000; border-radius: 8px; overflow: hidden; }
+        .
+[2026/3/23 19:29] 超级鲨鱼辣椒: video-container video { width: 100%; display: block; max-height: 400px; object-fit: cover; }
+        .video-desc { font-size: 14px; font-weight: bold; color: #000; }
+        .video-date { font-size: 12px; color: #666; }
+
+        /* ================= Side Menu ================= */
+        .side-menu { position: absolute; top: 0; left: -100%; width: 80%; height: 100%; background-color: var(--menu-bg); color: var(--menu-text); transition: left 0.3s ease; z-index: 30; display: flex; flex-direction: column; overflow-y: auto;}
+        .side-menu.active { left: 0; }
+        .close-menu { align-self: flex-end; padding: 20px; font-size: 24px; background: none; border: none; color: var(--menu-text); cursor: pointer; }
+        .menu-list { list-style: none; width: 100%; }
+        .menu-list li { border-bottom: 1px solid var(--menu-border); }
+        .menu-list button { display: block; width: 100%; text-align: left; padding: 20px; color: var(--menu-text); background: none; border: none; font-size: 16px; cursor: pointer; font-weight: bold;}
+        .menu-list button.sub-item { padding-left: 40px; font-weight: normal; color: #ccc; }
+        .menu-list button.highlight { font-weight: bold; color: #fff; text-transform: uppercase; letter-spacing: 1px;}
+
+        /* ================= Cart Drawer ================= */
+        .cart-drawer { position: absolute; top: 0; right: -100%; width: 100%; height: 100%; background-color: var(--bg-color); transition: right 0.3s ease; z-index: 30; display: flex; flex-direction: column; }
+        .cart-drawer.active { right: 0; }
+        .cart-header { display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid var(--border-color); }
+        .cart-header h2 { font-size: 18px; }
+        .close-cart { font-size: 24px; background: none; border: none; cursor: pointer; }
+        
+        .cart-items { flex: 1; padding: 20px; overflow-y: auto; }
+        .cart-item { display: flex; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px;}
+        .item-img { width: 50px; height: 50px; background-color: #000; color: #fff; border-radius: 5px; margin-right: 15px; display: flex; justify-content: center; align-items: center; font-size: 10px; font-weight: bold;}
+        .item-details { flex: 1; }
+        .item-title-price { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: bold; font-size: 14px; }
+        .quantity-control { display: inline-flex; border: 1px solid var(--border-color); border-radius: 4px; overflow: hidden; }
+        .qty-btn { background: none; border: none; padding: 2px 10px; font-size: 16px; cursor: pointer; }
+        .qty-input { width: 30px; text-align: center; border: none; border-left: 1px solid var(--border-color); border-right: 1px solid var(--border-color); font-size: 14px; }
+        .remove-btn { color: red; background: none; border: none; font-size: 12px; margin-left: 10px; cursor: pointer;}
+        .empty-cart-msg { text-align: center; color: #888; margin-top: 50px; font-size: 16px; }
+
+        .cart-footer { padding: 20px; border-top: 1px solid var(--border-color); background: #fff;}
+        .subtotal { display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 15px; font-size: 18px;}
+        .checkout-btn { width: 100%; background-color: var(--btn-bg); color: var(--btn-text); border: none; padding: 15px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-bottom: 15px; }
+
+        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 20; display: none; opacity: 0; transition: opacity 0.3s; }
+        .overlay.active { display: block; opacity: 1; }
     </style>
 </head>
 <body>
 
-    <div id="safe-page">
-        <div class="candy-header"><div class="candy-logo">zastation Sweet Treats</div></div>
-        <div class="candy-hero"><h2 style="color: #ff8fb1;">Premium Collection</h2><p style="color: #999;">Explore our handcrafted selection.</p></div>
-        
-        <div class="candy-card-container">
-            <div class="candy-card"><img src="https://i.ibb.co/GQB59BYP/IMG-1436.jpg" class="candy-img"><div class="candy-name">Wild Berry DOTS</div></div>
-            <div class="candy-card"><img src="https://i.ibb.co/pBWwXKyn/IMG-1435.jpg" class="candy-img"><div class="candy-name">Lemonade DOTS</div></div>
-            <div class="candy-card"><img src="https://i.ibb.co/zTm4NxSJ/IMG-1434.jpg" class="candy-img"><div class="candy-name">Tropical DOTS</div></div>
-            <div class="candy-card"><img src="https://i.ibb.co/5gsSzMDq/IMG-1433.jpg" class="candy-img"><div class="candy-name">Ghost DOTS</div></div>
-            <div class="candy-card"><img src="https://i.ibb.co/XxB1VX95/IMG-1432.jpg" class="candy-img"><div class="candy-name">Springtime DOTS</div></div>
-            <div class="candy-card"><img src="https://i.ibb.co/ZzcwZjNd/IMG-1431.jpg" class="candy-img"><div class="candy-name">GRIPZ Marshmallow</div></div>
-            <div class="candy-card"><img src="https://i.ibb.co/R449qYqJ/IMG-1430.jpg" class="candy-img"><div class="candy-name">GRIPZ Chips Deluxe</div></div>
-            <div class="candy-card"><img src="https://i.ibb.co/35Cw8nzp/IMG-1429.jpg" class="candy-img"><div class="candy-name">GRIPZ Cinnamon</div></div>
-            <div class="candy-card"><img src="https://i.ibb.co/VpgPwL5g/IMG-1428.jpg" class="candy-img"><div class="candy-name">Berry Blast Twister</div></div>
-            <div class="candy-card"><img src="https://i.ibb.co/V7hsPYN/IMG-1427.jpg" class="candy-img"><div class="candy-name">Tropical Fury Twister</div></div>
-            <div class="candy-card"><img src="https://i.ibb.co/Lh1PVC28/IMG-1426.jpg" class="candy-img"><div class="candy-name">Strawberry Yogos</div></div>
-            <div class="candy-card"><img src="https://i.ibb.co/WW8fD7b5/IMG-1425.jpg" class="candy-img"><div class="candy-name">Crazy Berry Yogos</div></div>
-            <div class="candy-card"><img src="https://i.ibb.co/0RJss4Kn/IMG-1424.jpg" class="candy-img"><div class="candy-name">Island Explosion Yogos</div></div>
-            <div class="candy-card"><img src="https://i.ibb.co/mCRrhP6t/IMG-1423.jpg" class="candy-img"><div class="candy-name">Blue Raspberry Yogos</div></div>
-            <div class="candy-card"><img src="https://i.ibb.co/d41Tfyqz/IMG-1422.jpg" class="candy-img"><div class="candy-name">Berry Smoothie Yogos</div></div>
-            <div class="candy-card"><img src="https://i.ibb.co/jknxFTWQ/IMG-1421.jpg" class="candy-img"><div class="candy-name">Tropicana Essentials Orange</div></div>
-            <div class="candy-card"><img src="https://i.ibb.co/cXsYx7VB/IMG-1420.jpg" class="candy-img"><div class="candy-name">Tropicana Essentials Mango</div></div>
-            <div class="candy-card"><img src="https://i.ibb.co/4n1YSVSN/IMG-1419.jpg" class="candy-img"><div class="candy-name">Tropicana Essentials Peach</div></div>
-            <div class="candy-card"><img src="https://i.ibb.co/tPHPwfzx/IMG-1418.jpg" class="candy-img"><div class="candy-name">Push Pop Cherry Soda</div></div>
-            <div class="candy-card"><img src="https://i.ibb.co/B2PXQXVy/IMG-1417.jpg" class="candy-img"><div class="candy-name">Push Pop Berry Blast</div></div>
+<div class="app-container">
+    <div class="overlay" id="overlay"></div>
+
+    <header>
+        <button class="menu-btn" onclick="toggleMenu(true)">☰</button>
+        <div class="brand-name" onclick="switchPage('home')">ZASTATION</div>
+        <button class="cart-btn" onclick="toggleCart(true)">🛒 <span id="cartCountBadge">0</span></button>
+    </header>
+
+    <div id="page-home" class="page-content active">
+        <div class="logo-container">
+            <img src="./logo.png" alt="ZASTATION Logo">
         </div>
-        <p style="font-size: 11px; color: #ccc; margin-top: 50px;">© 2026 zastation Confectionery. All rights reserved.</p>
+        <div class="links-container">
+            <button class="link-btn" onclick="switchPage('edibles')">View Edibles Menu</button>
+            <button class="link-btn" onclick="switchPage('disposables')">View Disposables Menu</button>
+            <a href="https://t.me/your_telegram" class="link-btn" target="_blank">Telegram Service</a>
+            <button class="link-btn" onclick="switchPage('touchdown')">Touch Down Videos</button>
+        </div>
     </div>
 
-    <div id="money-page">
-        <img src="logo.png" alt="zastation" class="m-logo" onerror="this.src='https://via.placeholder.com/150/000000/FFFFFF?text=ZA+STATION'">
-        <div class="m-h1">To order, please join our Telegram Channel.</div>
-        <a href="https://t.me/+M8BUaAlXvp4yZTkx" class="btn">JOIN CHANNEL</a>
-        <div class="m-footer">SECURE ACCESS BY zastation</div>
+    <div id="page-edibles" class="page-content">
+        <div class="page-title">Edibles</div>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-img">Gummy IMG</div>
+                <div class="product-name">ZA Sour Gummies 500mg</div>
+                <div class="product-price">$25.00</div>
+                <button class="add-to-cart-btn" onclick="addToCart('ZA Sour Gummies 500mg', 25.00)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <div class="product-img">Choco IMG</div>
+                <div class="product-name">ZA Space Chocolate</div>
+                <div class="product-price">$30.00</div>
+                <button class="add-to-cart-btn" onclick="addToCart('ZA Space Chocolate', 30.00)">Add to Cart</button>
+            </div>
+             <div class="product-card">
+                <div class="product-img">Cookie IMG</div>
+                <div class="product-name">ZA Magic Cookie</div>
+                <div class="product-price">$20.00</div>
+                <button class="add-to-cart-btn" onclick="addToCart('ZA Magic Cookie', 20.00)">Add to Cart</button>
+            </div>
+        </div>
     </div>
 
-    <script>
-        (function() {
-            var ua = navigator.userAgent;
-            var ref = document.referrer;
-            // 判定逻辑：仅 Instagram 来源且非机器人可见钱页
-            var isInsta = (ref.indexOf('instagram.com') !== -1 || ua.indexOf('Instagram') !== -1);
-            var bots = ['Facebot', 'facebookexternalhit', 'Googlebot', 'Twitterbot', 'AdsBot', 'Lighthouse'];
-            var isBot = bots.some(function(bot) { return ua.indexOf(bot) !== -1; });
+    <div id="page-disposables" class="page-content">
+        <div class="page-title">Disposables</div>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-img" style="border-radius: 20px;">Vape IMG 1</div>
+                <div class="product-name">2G ACE STATION ULTRA</div>
+                <div class="product-price">$18.00</div>
+                <button class="add-to-cart-btn" onclick="addToCart('2G ACE STATION ULTRA', 18.00)">Add to Cart</button>
+            </div>
+            <div class="product-card">
+                <div class="product-img" style="border-radius: 20px;">Vape IMG 2</div>
+                <div class="product-name">1G ZA Premium Pen</div>
+                <div class="product-price">$15.00</div>
+                <button class="add-to-cart-btn" onclick="addToCart('1G ZA Premium Pen', 15.00)">Add to Cart</button>
+            </div>
+        </div>
+    </div>
 
-            if (isInsta && !isBot) {
-                document.getElementById('safe-page').style.display = 'none';
-                document.getElementById('money-page').style.display = 'flex';
-                document.body.style.background = '#000';
-            }
-        })();
-    </script>
+    <div id="page-touchdown" class="page-content">
+        <div class="page-title">Touch Down</div>
+        
+        <div class="video-feed">
+            <div class="video-item">
+                <div class="video-container">
+                    <video controls>
+                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="video-desc">🔥 Fresh Batch Landed! ACE STATION ULTRA Unboxing.</div>
+                <div class="video-date">Just Now</div>
+            </div>
+
+            <div class="video-item">
+                <div class="video-container">
+                    <video controls>
+                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="video-desc">📦 Restock: ZA Premium Pen available now.</div>
+                <div class="video-date">2 Days Ago</div>
+            </div>
+
+            <div class="video-item">
+                <div class="video-container">
+                    <video controls><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="video-desc">🍬 Edibles Touch Down. Check out the new flavors.</div>
+                <div class="video-date">1 Week Ago</div>
+            </div>
+            
+            </div>
+    </div>
+
+    <div class="side-menu" id="sideMenu">
+        <button class="close-menu" onclick="toggleMenu(false)">✕</button>
+        <ul class="menu-list">
+            <li><button onclick="switchPage('home')">Menu</button></li>
+            
+            <li><button onclick="switchPage('touchdown')" class="highlight">TOUCH DOWN</button></li>
+            
+            <li><button onclick="switchPage('edibles')" class="sub-item">• Edibles</button></li>
+            <li><button onclick="switchPage('disposables')" class="sub-item">• Disposables</button></li>
+            <li><button onclick="alert('Coming Soon!')" class="sub-item">• Concentrates</button></li>
+            
+            <li><button onclick="alert('Promotions link here')" style="margin-top: 20px; border-top: 1px solid #333;">Free Promotions</button></li>
+            <li><button onclick="alert('Bundles link here')">Bulk Bundle Deals</button></li>
+        </ul>
+    </div>
+
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h2 id="cartTitle">Cart (0)</h2>
+            <button class="close-cart" onclick="toggleCart(false)">✕</button>
+        </div>
+        
+        <div class="cart-items" id="cartItemsContainer">
+            <div class="empty-cart-msg">Your cart is empty.</div>
+        </div>
+
+        <div class="cart-footer">
+            <div class="subtotal">
+                <span>Total</span>
+                <span id="subtotalPrice">$0.00</span>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Submit Order</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function switchPage(pageId) {
+        document.querySelectorAll('.page-content').forEach(page => {
+            page.classList.remove('active');
+        });
+        document.getElementById('page-' + pageId).classList.add('active');
+        toggleMenu(false);
+        window.scrollTo(0, 0);
+    }
+
+    function toggleMenu(show) {
+        document.getElementById('sideMenu').classList.toggle('active', show);
+        document.getElementById('overlay').classList.toggle('active', show);
+    }
+    
+    function toggleCart(show) {
+        document.getElementById('cartDrawer').classList.toggle('active', show);
+        document.getElementById('overlay').classList.toggle('active', show);
+        if(show) renderCart(); 
+    }
+
+    document.getElementById('overlay').addEventListener('click', () => {
+        toggleMenu(false); toggleCart(false);
+    });
+
+    let cartData = []; 
+
+    function addToCart(name, price) {
+        const existingItem = cartData.find(item => item.name === name);
+        if (existingItem) {
+            existingItem.qty += 1; 
+        } else {
+            cartData.push({ name: name, price: price, qty: 1 }); 
+        }
+        updateCartBadge();
+        toggleCart(true); 
+    }
+
+    function changeQty(index, delta) {
+        cartData[index].qty += delta;
+        if (cartData[index].qty <= 0) {
+            cartData.splice(index, 1); 
+        }
+        updateCartBadge();
+        renderCart();
+    }
+
+    function removeItem(index) {
+        cartData.splice(index, 1);
+        updateCartBadge();
+        renderCart();
+    }
+
+    function updateCartBadge() {
+        let totalItems = 0;
+        let totalPrice = 0;
+        cartData.forEach(item => {
+            totalItems += item.qty;
+            totalPrice += item.price * item.qty;
+        });
+        
+        document.getElementById('cartCountBadge').innerText = totalItems;
+        document.getElementById('cartTitle').innerText = Cart (${totalItems});
+        document.getElementById('subtotalPrice').innerText = $${totalPrice.toFixed(2)};
+    }
+
+    function renderCart() {
+        const container = document.getElementById('cartItemsContainer');
+        container.innerHTML = ''; 
+        
+        if (cartData.length === 0) {
+            container.innerHTML = '<div class="empty-cart-msg">Your cart is empty.</div>';
+            return;
+        }
+
+        cartData.forEach((item, index) => {
+            const itemHTML = `
+                <div class="cart-item">
+                    <div class="item-img">ZA</div>
+                    <div class="item-details">
+                        <div class="item-title-price">
+                            <span>${item.name}</span>
+                            <span>$${(item.price * item.qty).toFixed(2)}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div class="quantity-control">
+                                <button class="qty-btn" onclick="changeQty(${index}, -1)">−</button>
+                                <input type="text" class="qty-input" value="${item.qty}" readonly>
+                                <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+                            </div>
+                            <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML += itemHTML;
+        });
+    }
+
+    function checkout() {
+        if (cartData.length === 0) {
+            alert("Your cart is empty!");
+            return;
+        }
+        
+        let orderSummary = "Order Summary:\n\n";
+        let total = 0;
+        cartData.forEach(item => {
+            orderSummary += - ${item.name} x${item.qty} ($${(item.price * item.qty).toFixed(2)})\n;
+            total += item.price * item.qty;
+        });
+        orderSummary += \nTotal: $${total.toFixed(2)};
+
+        alert("This would send the order to your Telegram:\n\n" + orderSummary);
+    }
+</script>
+
 </body>
 </html>
